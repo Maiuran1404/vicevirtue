@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+}
+
+p{
+    font-size: 30;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+li, a, button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+}
+
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.nav_links {
+    list-style-type: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+    list-style-type: none;
+}
+
+.nav_links li a{
+    transition: all 0.3s ease 0ms;
+    list-style-type: none;
+}
+
+.nav_links  li a:hover{
+    color: #0088a9;
+}
+
+button{
+    margin-left: 20x;
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0ms;
+}
+
+button:hover{
+    background-color: rgba(0,136,169,0.8);
+}
+
+
+h3{
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 10%;
+    color: white;
+}
+
+h3{
+    font-family: "Montserrat", sans-serif;
+    font-size: 30;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px 10%;
+    color: black;
+}
+
+.inspire{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    position: relative; 
+}
+
+.inspire-text{
+    font-family: 'Poppins', sans-serif;
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.inspire-text h1{
+    margin: 100px 0 50px 70px;
+    line-height: 40px;
+}
+
+
+#inspire-text p{
+    font-family: 'Poppins', sans-serif;
+    padding-left: 50px;
+    line-height: 25px;
+}
+
+.inspire-banner {
+    width: 49%;
+    height: 100%;
+    float: right;
+    text-align: center;   
+}
+
+.inspire-banner img{
+    width: 100%;
+    margin: 100px auto;
+}
+
+.wrapper{
+    height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    margin-left: 100px;
+    margin-right: 10px;
+}
+
+.wrapper small{
+    margin-left: 100px;
+}
+
+.wrapper small b{
+    margin-right: 10px;
+}

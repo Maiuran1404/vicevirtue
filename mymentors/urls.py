@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('brainplatform.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
+    path('posts/', include('posts.urls'))
 ]
