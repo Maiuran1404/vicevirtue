@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+
+<!DOCTYPE html>
+  <head>
+    <title>Daily Posts</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/static/styles/all_posts.css">
+  </head>
+
+  <body>  
+  
+    <header>
+      {% if user.is_authenticated %}
+      <a class="logo"href="/">{{user.first_name}}'s Digital Brain</a>
+      <nav>
+          <ul class="nav_links">
+              <li><a href="all_posts">All {{user.first_name}}'s posts</a></li>
+              <li><a href="write_post">Add a new post</a></li>
+              <li><a href="daily_posts">View Daily Posts</a></li>
+              <li class="cta"><span><a href="logout"><button>Logout</button></a></span></li>
+              {% else %}
+              <a class="logo"href="/">Digital Brain</a>
+              <li><a href="accounts/login">Register/Login</a></li>
+              {% endif %}
+          </ul>
+      </nav>
+    </header>
+
+<!--
+    <div>
+      {% load tz %}
+      {% get_current_timezone as TIME_ZONE %}
+      <form action="set_timezone" method="POST">
+          {% csrf_token %}
+          <label for="timezone">Time zone: {{ pytz.all_timezones }}</label>
+          <select name="timezone">
+              {% for tz in timezones %}
+              <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+              {% endfor %}
+          </select>
+          <input type="submit" value="Set">
+      </form>
+    </div>
+-->
+
+
+    <div class="total">
+        {% for post in daily_posts %}
+        <div class="wrapper">
+            <div class="card">
+                  <div class="card-text"> 
+                    <h3>{{ post.description }}</h3>
+                    <p class="date">Subject: {{post.subject}}</p>
+                    <p class="date">Source: {{post.source}}</p>
+                    <p id="italic">{{post.updated}}</p>
+                  </div>
+            </div>
+        </div>
+        {% endfor %}  
+        <form action='daily_posts' method='post'>
+          {% csrf_token %}
+          <!--<p name="id">{{post.id}}</p> -->
+          <button type='submit'> Read </button>
+      </form>
+    </div>
+  </body>
+</html>
+
+
+<!--
+          <div class="card-stats"> Subject: {{post.subject}}</div>
+        <div class="card-stats"> Source: {{post.source}}</div>
+-->
+
+            <!--<div class="card-stats">
+              <div class="stat">
+                <div class="value">4m</div>
+                <div class="type">read</div>
+              </div>
+              <div class="stat">
+                <div class="value">4m</div>
+                <div class="type">read</div>
+              </div>-->
+
+{% endblock %}
