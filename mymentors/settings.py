@@ -25,7 +25,7 @@ SECRET_KEY = '-nn*&vvezdk^gg74^=pha$a%rxmt$nf5*h&nva0$w$146-d-l1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mymentors.herokuapp.com']
 
 
 # Application definition
