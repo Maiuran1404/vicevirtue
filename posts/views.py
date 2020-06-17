@@ -7,7 +7,7 @@ from django import forms
 import datetime
 from django.utils import timezone
 from django.utils.timezone import utc
-
+from .forms import UserProfileForm
 
 
 # Create your views here.
@@ -36,6 +36,17 @@ def selectPost(request):
         #posts = Post.objects.filter(author_id=request.user).order_by('updated')
         posts = Post.objects.order_by('updated')
         return render(request, 'all_posts.html', {'posts': posts, 'selected_mentors': selected_mentors})
+
+def addMentor(request):
+    if request.POST:
+        profile_form = UserProfileForm(request.POST)
+        if profile_form.is_valid():
+            profile_form.save(commit=False)
+            return redirect('all_posts.html')
+    else:
+        return redirect('home.html')
+        
+    return render(request, 'all_posts.html', {'profile_form': profile_form})
 
 def writePost(request):
 

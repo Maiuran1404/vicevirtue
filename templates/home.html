@@ -46,6 +46,14 @@
             <div class="inspire-text">
                 <span></span>
                 <h1> Daily Mentorship </h1>
+            <div>
+                <form action="add_mentor" method="POST">
+                {% csrf_token %}
+                 <input type="text" class="create-text" name="description" placeholder="Description" required><br>
+                {{ profile_form.as_table }}
+                <input type="submit" value="Add Mentor"
+                </form>
+            </div>
                 <p> Get content from your favorite mentors to start your morning with a new mindset. "You are 
                 the average of the 5 people you spend the most time with". What if you spend a little more
                 time with the people who inspire you? </p>

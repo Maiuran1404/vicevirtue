@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['mymentors.herokuapp.com', '*']
 INSTALLED_APPS = [
     'brainplatform.apps.BrainplatformConfig',
     'posts.apps.PostsConfig',
+    'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
