@@ -15,8 +15,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now = True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     seen = models.IntegerField(default=0, editable=False)
-    source = models.TextField()
-    subject = models.TextField()  #Change this to multiple choice/autofill option
+    contenttype = models.TextField()
+    mentor = models.TextField()  #Change this to multiple choice/autofill option
 
     def __str__(self):
         return str(self.description)

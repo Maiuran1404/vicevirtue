@@ -5,7 +5,7 @@
 <!DOCTYPE html>
   <head>
     <title>write_post</title>
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/static/images/pandathree.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/static/styles/write_posts.css">
@@ -14,17 +14,21 @@
   <body>
     <header>
       {% if user.is_authenticated %}
-      <a class="logo"href="/">{{user.first_name}}'s Digital Brain</a>
+      <a class="logo"href="/">{{user.first_name}}'s Mentors </a>
       <nav>
           <ul class="nav_links">
-              <li><a href="all_posts">All {{user.first_name}}'s posts</a></li>
-              <li><a href="write_post">Add a new post</a></li>
-              <li><a href="daily_posts">View Daily Posts</a></li>
+              <li><a href="all_posts">All {{user.first_name}}'s Mentors</a></li>
+              <li><a href="daily_posts">View Daily Mentors </a></li>
               <li class="cta"><span><a href="logout"><button>Logout</button></a></span></li>
               {% else %}
               <li><a href="accounts/register">Register</a></li>
               <li><a href="accounts/login">Login</a></li>
               {% endif %}
+
+              {% if user.is_superuser %}
+              <li><a href="write_post">Add a New Mentors </a></li>
+              {% endif %}
+
           </ul>
       </nav>
     </header>
@@ -33,13 +37,20 @@
       <form action="write_post" method="post">
         {% csrf_token %}
         <input type="text" class="create-text" name="description" placeholder="Description" required><br>
-        <input type="text" class="create-text" name="source" placeholder="Source"><br>
-        <input type="text" class="create-text" name="subject" placeholder="Subject"><br>
+        <input type="text" class="create-text" name="contenttype" placeholder="Content type"><br>
+        <input type="text" class="create-text" name="newmentor" placeholder="New Mentor"><br>
+
+        <select name="mentor">
+        {% for mentor in selected_mentors %}
+          <option name="mentor">{{mentor}}</option>
+        {% endfor %}
+        </select>
+
         <input type="submit" class="submit-btn">
       </form>
     </div>
 
-    
+
   </body>
 </html>
 

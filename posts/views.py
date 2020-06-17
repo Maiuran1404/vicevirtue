@@ -12,33 +12,54 @@ from django.utils.timezone import utc
 
 # Create your views here.
 def posts(request):
-    posts = Post.objects.filter(author_id=request.user).order_by('updated')
-    return render(request, 'all_posts.html', {'posts': posts})
+    #posts = Post.objects.filter(author_id=request.user).order_by('updated')
+    posts = Post.objects.order_by('updated')
+    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    return render(request, 'all_posts.html', {'posts': posts, 'selected_mentors': selected_mentors})
 
 def selectPost(request):
+    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    print(selected_mentors)
+
     if request.method == 'POST':
-        subject = request.POST['subject']
-        print(subject)
-        selected_posts = Post.objects.filter(subject=subject)
-        return render(request, 'all_posts.html', {'selected_posts': selected_posts})
+        mentor = request.POST['mentor']
+        print(mentor)
+        selected_posts = Post.objects.filter(mentor=mentor).order_by('updated')
+        if selected_posts == None:
+            print("no mentors")
+            #posts = Post.objects.order_by('updated')
+            #return render(request, 'all_posts.html', {'posts': posts})
+            return redirect('all_posts.html')
+        else:
+            return render(request, 'all_posts.html', {'selected_posts': selected_posts, 'selected_mentors': selected_mentors})
     else:
-        posts = Post.objects.filter(author_id=request.user).order_by('updated')
-        return render(request, 'all_posts.html', {'posts': posts})
+        #posts = Post.objects.filter(author_id=request.user).order_by('updated')
+        posts = Post.objects.order_by('updated')
+        return render(request, 'all_posts.html', {'posts': posts, 'selected_mentors': selected_mentors})
 
 def writePost(request):
 
+    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    print(selected_mentors)
+
     if request.method == 'POST':
         description = request.POST['description']
-        source = request.POST['source']
-        subject = request.POST['subject']
-        
-        post = Post(description=description, source=source, subject=subject, seen = 0, author_id=request.user.pk)
-        post.save()
-        print('Post created')
-        return redirect('all_posts')
-        
+        contenttype = request.POST['contenttype']
+        if request.POST['mentor'] == "":
+            mentor = request.POST['newmentor']
+            post = Post(description=description, contenttype=contenttype, mentor=mentor, seen = 0, author_id=request.user.pk)
+            post.save()
+            print('Post created')
+            return redirect('all_posts')
+        else:
+            mentor = request.POST['mentor']
+            post = Post(description=description, contenttype=contenttype, mentor=mentor, seen = 0, author_id=request.user.pk)
+            post.save()
+            print('Post created')
+            return redirect('all_posts')
     else:
-        return render(request, 'write_post.html')
+        selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+        return render(request, 'write_post.html', {'selected_mentors': selected_mentors})
 
 def logout(request):
     auth.logout(request)

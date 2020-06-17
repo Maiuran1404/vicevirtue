@@ -5,7 +5,7 @@
 <!DOCTYPE html>
   <head>
     <title>posts</title>
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/static/images/pandathree.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/static/styles/all_posts.css">
@@ -15,34 +15,52 @@
   
     <header>
       {% if user.is_authenticated %}
-      <a class="logo"href="/">{{user.first_name}}'s Digital Brain</a>
+      <a class="logo"href="/">{{user.first_name}}'s Mentors </a>
       <nav>
           <ul class="nav_links">
-              <li><a href="all_posts">All {{user.first_name}}'s posts</a></li>
-              <li><a href="write_post">Add a new post</a></li>
-              <li><a href="daily_posts">View Daily Posts</a></li>
+              <li><a href="all_posts">All {{user.first_name}}'s Mentors </a></li>
+              <li><a href="daily_posts">View Daily Mentors </a></li>
               <li class="cta"><span><a href="logout"><button>Logout</button></a></span></li>
               {% else %}
-              <a class="logo"href="/">Digital Brain</a>
+              <a class="logo"href="/">My Mentors</a>
               <li><a href="accounts/login">Register/Login</a></li>
               {% endif %}
+
+              {% if user.is_superuser %}
+              <li><a href="write_post">Add a New Mentors </a></li>
+              {% endif %}
+
           </ul>
       </nav>
     </header>
 
+<!-- first poll -->
     <div class="wrapper2">
       <form action="select_post" method="post">
         {% csrf_token %}
-<!--
-        <select name="posts">      
-          {% for post in posts %}
-            <option value="{{ post.subject }}" name="subject">{{ post.subject}}</option>
-          {% endfor %}
-          <input type="submit" class="submit-btn">
-        </select> -->
-        <input type="text" class="create-text" name="subject" placeholder="Subject"><br>
+        <input type="text" class="create-text" name="mentor" placeholder="Mentor"><br>
+
+        <select name="mentor">
+        {% for mentor in selected_mentors %}
+          <option name="mentor">{{mentor}}</option>
+        {% endfor %}
+        </select>
+
+        <!-- next poll --> 
         <input type="submit" class="submit-btn">
       </form>
+
+      <form action="select_post" method="post">
+        {% csrf_token %}
+        <select name="mentor">
+        {% for mentor in selected_mentors %}
+          <option name="mentor">{{mentor}}</option>
+        {% endfor %}
+        </select>
+
+        <input type="submit" class="submit-btn">
+      </form>
+      <!-- next poll done -->
     </div>
 
     <div class="total">
@@ -51,13 +69,15 @@
           <div class="card">
                 <div class="card-text"> 
                   <h3>{{ post.description }}</h3>
-                  <p class="date">Subject: {{post.subject}}</p>
-                  <p class="date">Source: {{post.source}}</p>
+                  <p class="date">Mentor: {{post.mentor}}</p>
+                  <p class="date">Content: {{post.contenttype}}</p>
                   <p id="italic">{{post.updated}}</p>
                 </div>
           </div>
       </div>
       {% endfor %}   
+
+
 <!--
       <form action="select_post" method="POST">
         {% csrf_token %}
@@ -79,8 +99,8 @@
           <div class="card">
                 <div class="card-text"> 
                   <h3>{{ post.description }}</h3>
-                  <p class="date">Subject: {{post.subject}}</p>
-                  <p class="date">Source: {{post.source}}</p>
+                  <p class="date">Mentor: {{post.mentor}}</p>
+                  <p class="date">Content: {{post.contenttype}}</p>
                   <p id="italic">{{post.updated}}</p>
                 </div>
           </div>
