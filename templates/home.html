@@ -4,8 +4,8 @@
 
 <!DOCTYPE html>
 <head>
-    <title>My Mentors</title>
-    <link rel="icon" type="image/x-icon" href="/static/images/pandathree.png" />
+    <title>Vice and Virtue</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/koala.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
@@ -18,23 +18,19 @@
 
     <header>
         {% if user.is_authenticated %}
-        <a class="logo"href="/">{{user.first_name}}'s Mentors </a>
+        <a class="logo"href="/">{{user.first_name}}'s Journals </a>
         <nav>
             <ul class="nav_links">
                 
-                <li><a href="posts/all_posts">All {{user.first_name}}'s Mentors</a></li>
-                <li><a href="posts/daily_posts">View Daily Mentors </a></li>
+                <li><a href="posts/all_posts">All {{user.first_name}}'s Journals</a></li>
+                <!--<li><a href="posts/daily_posts">View Daily Mentors </a></li>-->
+                <li><a href="posts/write_post">Write today's journal </a></li>
                 <li class="cta"><span><a href="accounts/logout"><button>Logout</button></a></span></li>
                 {% else %}
-                <a class="logo"href="/">My Mentors</a>
+                <a class="logo"href="/">Vice and Virtue</a>
                 <li><a href="accounts/login">Sign up / Sign in</a></li>
                 {% endif %}
 
-                {% if user.is_superuser %}
-
-                <li><a href="posts/write_post">Add a New Mentor </a></li>
-
-                {% endif %}
             </ul>
         </nav>
     </header>
@@ -45,21 +41,12 @@
         <div class="inspire">
             <div class="inspire-text">
                 <span></span>
-                <h1> Daily Mentorship </h1>
-            <div>
-                <form action="add_mentor" method="POST">
-                {% csrf_token %}
-                 <input type="text" class="create-text" name="description" placeholder="Description" required><br>
-                {{ profile_form.as_table }}
-                <input type="submit" value="Add Mentor"
-                </form>
-            </div>
-                <p> Get content from your favorite mentors to start your morning with a new mindset. "You are 
-                the average of the 5 people you spend the most time with". What if you spend a little more
-                time with the people who inspire you? </p>
+                <h1> Journal like Benjamin Franklin </h1>
+                <p> "Every morning we are born again. What we do today is what matters most". 
+                Ask yourself the questions that Benjamin Franklin (and some other) asked themselves each day. </p>
             </div>
             <div class="inspire-banner">
-                <img src="/static/images/pandathree.png">
+                <img src="/static/images/koala.png">
             </div>
         </div> 
         <small><b> Why did we make this? </b></small>

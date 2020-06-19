@@ -7,7 +7,7 @@ urlpatterns = [
     path('write_post', views.writePost, name='write_post'),
     path('daily_posts', views.dailyPosts, name='daily_posts'),
     #path('set_timezone', views.set_timezone, name='set_timezone'),
-    path('select_post', views.selectPost, name='select_post'),
-    path('add_mentor', views.addMentor, name='add_mentor'),
+    #path('select_post', views.selectPost, name='select_post'),
+    #path('add_mentor', views.addMentor, name='add_mentor'),
     path('logout', views.logout, name='logout')
 ]

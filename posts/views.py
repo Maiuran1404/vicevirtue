@@ -14,28 +14,29 @@ from .forms import UserProfileForm
 def posts(request):
     #posts = Post.objects.filter(author_id=request.user).order_by('updated')
     posts = Post.objects.order_by('updated')
-    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
-    return render(request, 'all_posts.html', {'posts': posts, 'selected_mentors': selected_mentors})
+    #selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    return render(request, 'all_posts.html', {'posts': posts})
 
+"""
 def selectPost(request):
-    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
-    print(selected_mentors)
+    #selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    #print(selected_mentors)
 
     if request.method == 'POST':
-        mentor = request.POST['mentor']
-        print(mentor)
-        selected_posts = Post.objects.filter(mentor=mentor).order_by('updated')
-        if selected_posts == None:
-            print("no mentors")
+        quothree = request.POST['quothree']
+        print(quothree)
+        #selected_posts = Post.objects.filter(mentor=mentor).order_by('updated')
+        #if selected_posts == None:
+        print("no mentors")
             #posts = Post.objects.order_by('updated')
             #return render(request, 'all_posts.html', {'posts': posts})
-            return redirect('all_posts.html')
-        else:
-            return render(request, 'all_posts.html', {'selected_posts': selected_posts, 'selected_mentors': selected_mentors})
+        #    return redirect('all_posts.html')
+        #else:
+        return render(request, 'all_posts.html')
     else:
         #posts = Post.objects.filter(author_id=request.user).order_by('updated')
         posts = Post.objects.order_by('updated')
-        return render(request, 'all_posts.html', {'posts': posts, 'selected_mentors': selected_mentors})
+        return render(request, 'all_posts.html', {'posts': posts})
 
 def addMentor(request):
     if request.POST:
@@ -47,15 +48,22 @@ def addMentor(request):
         return redirect('home.html')
         
     return render(request, 'all_posts.html', {'profile_form': profile_form})
+"""
 
 def writePost(request):
 
-    selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
-    print(selected_mentors)
+    #selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+    #print(selected_mentors)
 
     if request.method == 'POST':
-        description = request.POST['description']
-        contenttype = request.POST['contenttype']
+        quoone = request.POST['quoone']
+        quotwo = request.POST['quotwo']
+        quothree = request.POST['quothree']
+        post = Post(quoone=quoone, quotwo=quotwo, quothree=quothree, seen = 0, author_id=request.user.pk)
+        post.save()
+        print('Post created')
+        return redirect('all_posts')
+        """
         if request.POST['mentor'] == "":
             mentor = request.POST['newmentor']
             post = Post(description=description, contenttype=contenttype, mentor=mentor, seen = 0, author_id=request.user.pk)
@@ -68,9 +76,10 @@ def writePost(request):
             post.save()
             print('Post created')
             return redirect('all_posts')
+        """
     else:
-        selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
-        return render(request, 'write_post.html', {'selected_mentors': selected_mentors})
+        #selected_mentors = Post.objects.order_by().values_list('mentor', flat=True).distinct('mentor')
+        return render(request, 'write_post.html')
 
 def logout(request):
     auth.logout(request)

@@ -10,13 +10,13 @@ from django.contrib.auth import get_user_model
 #        return timezone.now()
 
 class Post(models.Model):
-    description = models.TextField(max_length=280)
+    quoone = models.TextField(max_length=280)
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     seen = models.IntegerField(default=0, editable=False)
-    contenttype = models.TextField()
-    mentor = models.TextField()  #Change this to multiple choice/autofill option
+    quotwo = models.TextField()
+    quothree = models.TextField()  #Change this to multiple choice/autofill option
 
     def __str__(self):
         return str(self.description)
