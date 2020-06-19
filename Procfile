@@ -1,1 +1,1 @@
-web: gunicorn mymentors.wsgi
+web: gunicorn vicevirtue.wsgi
